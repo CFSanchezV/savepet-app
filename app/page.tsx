@@ -1,4 +1,4 @@
-import PetForm from "@/components/forms/PetForm";
+import AdopterForm from "@/components/forms/AdopterForm";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,7 +17,7 @@ export default function Home() {
           alt="pet"
           className="mb-12 h-10 w-fit"
         />
-        <PetForm />
+        <AdopterForm />
         <div className="text-14-regular mt-20 flex justify-between">
           <p className="justify-items-end text-dark-600 xl:text-left"> 2025 Savepet </p>
           <Link href="/?admin=true" className="text-green-500">
@@ -33,7 +33,6 @@ export default function Home() {
           alt="pet"
           className="side-img max-w-[50%]"
         />
-      <Button>Clcik this</Button>
     </div>
   );
 }
