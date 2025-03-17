@@ -1,12 +1,14 @@
-"use client"
+"use client";
 
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Form } from "@/components/ui/form"
-import CustomFormField from '../CustomFormField';
-import SubmitButton from "../SubmitButton"
-import { useState } from "react"
-import { UserFormValidation } from '@/lib/validation';
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Form } from "@/components/ui/form";
+import CustomFormField from "../CustomFormField";
+import SubmitButton from "../SubmitButton";
+import { useState } from "react";
+import { UserFormValidation } from "@/lib/validation";
+import { createUser } from "@/lib/actions/profile.actions";
+import { useRouter } from "next/navigation";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -18,27 +20,39 @@ export enum FormFieldType {
   SKELETON = "skeleton",
 }
 
-const AdopterForm = () => {
+const ProfileForm = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof UserFormValidation>>({
     defaultValues: {
+      name: "",
       email: "",
       phone: "",
     },
-  })
-
-  async function onSubmit({name, email, phone}: z.infer<typeof UserFormValidation>) {
+  });
+  
+  const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
     setIsLoading(true);
 
     try {
-      const userData = { name, email, phone}
+      const user = {
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+      };
 
-      //createUser
+      console.log("attempting user creation with data", user);
 
+      const newUser = await createUser(user);
+
+      if (newUser) router.push(`/profiles/${newUser.$id}/register`);
+      
     } catch (error) {
       console.log(error);
     }
+
+    setIsLoading(false);
   }
 
   return (
@@ -77,10 +91,10 @@ const AdopterForm = () => {
           placeholder="+51 910200300"
         />
 
-        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
+        <SubmitButton isLoading={isLoading}>Empecemos</SubmitButton>
       </form>
     </Form>
-  )
-}
+  );
+};
 
-export default AdopterForm;
+export default ProfileForm;
