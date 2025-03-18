@@ -79,9 +79,11 @@ export const PetFormDefaultValues = {
   age: 0,
   size: "mediano" as Size,
   gender: "macho" as PetGender,
+  status: "disponible" as AdoptionStatus,
   description: "",
   photos: [],
   location: LIMA_DISTRICTS[0].name,
+  birthDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 365 * 2),
   createdAt: new Date(Date.now()),
 };
 

@@ -78,3 +78,19 @@ export const registerProfile = async ({
     console.error("An error occurred while creating a new profile:", error);
   }
 };
+
+
+export const getProfile = async (userId: string) => {
+  try {
+    const profiles = await databases.listDocuments(
+      DATABASE_ID!,
+      PROFILE_COLLECTION_ID!, 
+      [Query.equal("userId", [userId])]);
+
+    console.log("profiles", profiles);
+    return parseStringify(profiles.documents[0]);
+
+  } catch (error) {
+      console.error("An error occurred while getting profiles:", error);
+  }
+}

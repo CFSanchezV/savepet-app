@@ -1,6 +1,6 @@
 import * as sdk from "node-appwrite";
 
-export const {  
+export const {
   PROJECT_ID,
   API_KEY,
   DATABASE_ID,
@@ -9,7 +9,7 @@ export const {
   REPORTEDPOST_COLLECTION_ID,
   PET_COLLECTION_ID,
   NEXT_PUBLIC_BUCKET_ID: BUCKET_ID,
-  NEXT_PUBLIC_ENDPOINT: ENDPOINT
+  NEXT_PUBLIC_ENDPOINT: ENDPOINT,
 } = process.env;
 
 const client = new sdk.Client();

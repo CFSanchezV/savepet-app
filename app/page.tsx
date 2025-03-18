@@ -21,7 +21,7 @@ export default function Home() {
 
           <div className="text-14-regular mt-20 flex justify-between">
             <p className="justify-items-end text-dark-600 xl:text-left">
-              2025 Savepet
+              ©️ 2025 Savepet
             </p>
             <Link href="/?admin=true" className="text-green-500">
               Admin
@@ -34,7 +34,7 @@ export default function Home() {
         src="/assets/images/adoption-img.jpg"
         height={1000}
         width={1000}
-        alt="pet"
+        alt="adoption"
         className="side-img max-w-[50%]"
       />
     </div>

@@ -28,9 +28,19 @@ interface CustomProps {
   dateFormat?: string;
   showTimeSelect?: boolean;
   children?: React.ReactNode;
-  renderSkeleton?: (field: any) => React.ReactNode;
+  renderSkeleton?: (field: {
+    value: any;
+    onChange: (value: any) => void;
+  }) => React.ReactNode;
   fieldType: FormFieldType;
 }
+
+const today = new Date();
+const minDate = new Date(
+  today.getFullYear() - 20,
+  today.getMonth(),
+  today.getDate()
+);
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   switch (props.fieldType) {
@@ -113,6 +123,11 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
               timeInputLabel="Hora:"
               dateFormat={props.dateFormat ?? "dd/MM/yyyy"}
               wrapperClassName="date-picker"
+              minDate={minDate}
+              maxDate={new Date()}
+              startDate={minDate}
+              endDate={new Date()}
+              showDisabledMonthNavigation
             />
           </FormControl>
         </div>

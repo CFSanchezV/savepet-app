@@ -9,11 +9,12 @@ export interface Pet extends Models.Document {
   size: Size;
   gender: PetGender;
   description: string;
-  profilePic: FormData[] | undefined;
+  photos: FormData | undefined;
+  photoUrls: string[] | undefined;
   location: string;
-  careTakerId: string;
   status: AdoptionStatus;
   createdAt: Date;
+  birthDate: Date;
 }
 
 export interface Profile extends Models.Document {
