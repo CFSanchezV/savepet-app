@@ -66,8 +66,8 @@ export const ProfileFormDefaultValues = {
   lastName: "",
   email: "",
   phone: "",
-  location: LIMA_DISTRICTS[0],
-  profilePic: "",
+  location: LIMA_DISTRICTS[0].name,
+  profilePic: [],
   isCaretaker: false,
   gender: "masculino" as Gender,
 };

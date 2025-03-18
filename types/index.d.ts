@@ -25,7 +25,11 @@ declare type SearchParamProps = {
   
   declare interface RegisterUserParams extends CreateUserParams {
     userId: string;
-    profilePic: string;
-    isCaretaker: boolean;
+    name: string;
+    email: string;
+    phone: string;
+    gender: Gender;
     location: string;
+    profilePic: FormData | undefined;
+    isCaretaker: boolean;
   }

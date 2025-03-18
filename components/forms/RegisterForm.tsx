@@ -4,18 +4,23 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Form, FormControl } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { SelectItem } from "@/components/ui/select";
-import { LIMA_DISTRICTS, GenderOptions } from "@/constants";
-import { UserFormValidation } from "@/lib/validation";
+import {
+  LIMA_DISTRICTS,
+  GenderOptions,
+  ProfileFormDefaultValues,
+} from "@/constants";
+import { ProfileFormValidation } from "@/lib/validation";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "react-phone-number-input/style.css";
 import SubmitButton from "../SubmitButton";
-import { createUser } from "@/lib/actions/profile.actions";
+import { registerProfile } from "@/lib/actions/profile.actions";
 import CustomFormField from "../CustomFormField";
 import { FormFieldType } from "./ProfileForm";
 import FileUploader from "../FileUploader";
@@ -24,30 +29,48 @@ const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const form = useForm<z.infer<typeof UserFormValidation>>({
+  const form = useForm<z.infer<typeof ProfileFormValidation>>({
+    resolver: zodResolver(ProfileFormValidation),
     defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-      location: LIMA_DISTRICTS[0].name,
+      ...ProfileFormDefaultValues,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
+  const onSubmit = async (values: z.infer<typeof ProfileFormValidation>) => {
     setIsLoading(true);
 
+    console.log("after clicking submit", values);
+    let formData;
+
+    if (values.profilePic && values.profilePic?.length > 0) {
+      console.log("first If after clikcing submit passed", values.profilePic);
+
+      const blobFile = new Blob([values.profilePic[0]], {
+        type: values.profilePic[0].type,
+      });
+
+      formData = new FormData();
+      formData.append("blobFile", blobFile);
+      formData.append("fileName", values.profilePic[0].name);
+    }
+
     try {
-      const user = {
-        name: values.name,
-        email: values.email,
-        phone: values.phone,
+      const profile = {
+        ...values,
+        userId: user.$id,
+        profilePic: formData,
       };
 
-      console.log("attempting user creation with data", user);
+      console.log("profile about to be created", profile);
 
-      const newUser = await createUser(user);
+      const newProfile = await registerProfile(profile);
 
-      if (newUser) router.push(`/profiles/${newUser.$id}/register`);
+      if (newProfile) {
+        router.push(`/profiles/${user.$id}/new-pet`);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +93,7 @@ const RegisterForm = ({ user }: { user: User }) => {
 
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
-            <h2 className="sub-header">Personal Information</h2>
+            <h2 className="sub-header">Información personal</h2>
           </div>
 
           {/* NAME */}
@@ -133,7 +156,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             <CustomFormField
               fieldType={FormFieldType.SKELETON}
               control={form.control}
-              name="profilePicture"
+              name="profilePic"
               label="Foto de perfil"
               renderSkeleton={(field) => (
                 <FormControl>
@@ -159,7 +182,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           fieldType={FormFieldType.CHECKBOX}
           control={form.control}
           name="isCaretaker"
-          label="tengo animales en adopción"
+          label="Sí, tengo animales en adopción"
         />
 
         <SubmitButton isLoading={isLoading}>Guardar datos</SubmitButton>

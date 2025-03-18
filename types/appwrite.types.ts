@@ -9,7 +9,7 @@ export interface Pet extends Models.Document {
   size: Size;
   gender: PetGender;
   description: string;
-  photos: string[];
+  profilePic: FormData[] | undefined;
   location: string;
   careTakerId: string;
   status: AdoptionStatus;
@@ -22,7 +22,7 @@ export interface Profile extends Models.Document {
   email: string;
   phone: string;
   location: string;
-  profilePic: string;
+  profilePic: FormData | undefined;
   isCaretaker: boolean;
   gender: Gender;
 }
