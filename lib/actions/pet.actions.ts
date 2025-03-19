@@ -50,15 +50,13 @@ export const createPet = async ({ photos, ...petData }: CreatePetParams) => {
       console.log("All photos uploaded successfully:", photoUrls);
     }
 
-    const petId = ID.unique();
-    console.log("Creating pet document in database with ID:", petId);
+    console.log("Creating pet document in database...");
     const newPet = await databases.createDocument(
       DATABASE_ID!,
       PET_COLLECTION_ID!,
-      petId,
+      ID.unique(),
       {
         ...petData,
-        petId,
         photoUrls,
       }
     );
@@ -68,5 +66,20 @@ export const createPet = async ({ photos, ...petData }: CreatePetParams) => {
   } catch (error) {
     console.error("Error in createPet function:", error);
     throw error; // Re-throw to handle in the form
+  }
+};
+
+// get pet by id
+export const getPetById = async (petId: string) => {
+  try {
+    const pet = await databases.getDocument(
+      DATABASE_ID!,
+      PET_COLLECTION_ID!,
+      petId
+    );
+    return parseStringify(pet);
+  } catch (error) {
+    console.error("Error in getPetById function:", error);
+    throw error;
   }
 };

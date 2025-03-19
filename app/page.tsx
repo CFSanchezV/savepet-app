@@ -10,11 +10,11 @@ export default function Home() {
       <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[496px]">
           <Image
-            src="/assets/icons/logo-full.png"
+            src="/assets/icons/savepet_logo_full.png"
             height={1000}
             width={1000}
             alt="pet"
-            className="mb-12 h-10 w-fit"
+            className="mb-12 h-20 w-fit"
           />
 
           <ProfileForm />

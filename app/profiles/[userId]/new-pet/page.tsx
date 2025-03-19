@@ -10,14 +10,14 @@ export default async function NewPet({ params: { userId } }: SearchParamProps) {
       <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[860px] flex-1 justify-between">
           <Image
-            src="/assets/icons/logo-full.png"
+            src="/assets/icons/savepet_logo_full.png"
             height={1000}
             width={1000}
             alt="pet"
-            className="mb-12 h-10 w-fit"
+            className="mb-12 h-20 w-fit"
           />
 
-          <PetForm type="create" userId={userId} profileId={profile.$id} />
+          <PetForm type="create" userId={userId} /* profileId={profile.$id} */ />
 
           <p className="justify-items-end text-dark-600 xl:text-left mt-2">
             ©️ 2025 Savepet

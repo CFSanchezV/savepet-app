@@ -24,11 +24,9 @@ import { createPet } from "@/lib/actions/pet.actions";
 const PetForm = ({
   type,
   userId,
-  profileId,
 }: {
   type: "create" | "update";
   userId: string;
-  profileId: string;
 }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -120,8 +118,9 @@ const PetForm = ({
       const newPet = await createPet(petData);
       console.log("Response from createPet:", newPet);
 
+      //redirect to success page
       if (newPet) {
-        router.push(`/pets`);
+        router.push(`/profiles/${userId}/new-pet/success?petId=${newPet.$id}`);
       }
     } catch (error) {
       console.error("Error in form submission:", error);
