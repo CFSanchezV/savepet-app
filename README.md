@@ -46,8 +46,9 @@ Visit `http://localhost:3000` to see the app in action.
 
 ## 📸 Screenshots
 
-Pending adding screenshots here!
+![registration](https://raw.githubusercontent.com/CFSanchezV/savepet-app/master/public/assets/icons/register-user.png) ![stray post](https://raw.githubusercontent.com/CFSanchezV/savepet-app/master/public/assets/icons/register-stray.png)
 
+![list strays](https://raw.githubusercontent.com/CFSanchezV/savepet-app/master/public/assets/icons/stray-list.png)
 
 
 ## 📜 License
