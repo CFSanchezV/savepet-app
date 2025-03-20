@@ -28,7 +28,7 @@ const Register = async ({params: {userId}}: SearchParamProps) => {
       </section>
 
       <Image
-        src="/assets/images/adoption-img.jpg"
+        src="/assets/images/registerPicture.jpg"
         height={1000}
         width={1000}
         alt="pet"
