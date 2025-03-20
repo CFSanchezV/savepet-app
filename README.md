@@ -1,36 +1,59 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+# SavePet - Find Homes for Stray Animals in your city
 
+![SavePet logo](https://raw.githubusercontent.com/CFSanchezV/savepet-app/master/public/assets/icons/savepet_logo.png)
+
+SavePet is a **Next.js** web application built with **React**, **Tailwind CSS**, and **Appwrite**. It allows users to register, log in, and post stray animals for adoption, helping them find a loving home.
+
+## 🚀 Features
+
+- **User Authentication** - Secure login and registration system.
+- **Adoption Posts** - Users can create, edit, and delete adoption listings.
+- **Custom React Components** - Streamlines form creation for improved usability.
+- **Image Upload & Storage** - Saves pet images in an **Appwrite bucket**.
+- **Responsive UI** - Designed with Tailwind CSS for a seamless mobile-friendly experience.
+- Private Messaging System **(future feature)** - Enables communication between users regarding adoptions.
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Next.js, React, Tailwind CSS
+- **Backend:** Appwrite (Database, Authentication, File Storage)
+- **Deployment:** Vercel (Frontend), Appwrite Cloud (Backend)
+
+## 📦 Installation & Setup
+
+### 1️⃣ Clone the Repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/CFSanchezV/savepet.git
+cd savepet
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2️⃣ Install Dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3️⃣ Set Up Environment Variables and Run the Migrations
+I'll provide migrations to replicate the Appwrite database in the future
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4️⃣ Run the Development Server
+```bash
+npm run dev
+```
+Visit `http://localhost:3000` to see the app in action.
 
-## Learn More
+## 📸 Screenshots
 
-To learn more about Next.js, take a look at the following resources:
+Pending adding screenshots here!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## 📜 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is licensed under the MIT License. Feel free to use and modify it! If you learn anything from it, feel free to let me know.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+Made with ❤️
