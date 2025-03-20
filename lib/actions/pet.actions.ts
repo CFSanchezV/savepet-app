@@ -8,8 +8,9 @@ import {
   PROJECT_ID,
   storage,
 } from "../appwrite.config";
-import { ID } from "node-appwrite";
+import { ID, Query } from "node-appwrite";
 import { parseStringify } from "../utils";
+import { Pet } from "@/types/appwrite.types";
 
 // create pet
 export const createPet = async ({ photos, ...petData }: CreatePetParams) => {
@@ -80,6 +81,53 @@ export const getPetById = async (petId: string) => {
     return parseStringify(pet);
   } catch (error) {
     console.error("Error in getPetById function:", error);
+    throw error;
+  }
+};
+
+// get all pets
+export const getAllPets = async () => {
+  try {
+    const pets = await databases.listDocuments(DATABASE_ID!, PET_COLLECTION_ID!, 
+      [Query.orderDesc("createdAt")]);
+    
+    const initialCounts = {
+      gatos: 0,
+      perros: 0,
+      otros: 0,
+    };
+
+    const updatedCounts = (pets.documents as Pet[]).reduce((acc, pet) => {
+      if (pet.species === "gato") {
+        acc.gatos++;
+      } else if (pet.species === "perro") {
+        acc.perros++;
+      } else {
+        acc.otros++;
+      }
+      return acc;
+    }, initialCounts);
+
+    const data = {
+      totalCount: pets.total,
+      ...updatedCounts,
+      documents: pets.documents
+    };
+
+    return parseStringify(data);
+  } catch (error) {
+    console.error("Error in getAllPets function:", error);
+    throw error;
+  }
+};
+
+// get all pets by type
+export const getAllPetsByType = async (species: Species) => {
+  try {
+    const pets = await databases.listDocuments(DATABASE_ID!, PET_COLLECTION_ID!, [Query.equal("species", species)]);
+    return parseStringify(pets);
+  } catch (error) {
+    console.error("Error in getAllPetsByType function:", error);
     throw error;
   }
 };

@@ -62,7 +62,7 @@ const SuccessPage = async ({
               height={50}
             />
             <p className="whitespace-nowrap" margin-bottom="0px">{pet?.species as string} de</p>
-            <p className="whitespace-nowrap">{((pet?.age as number) / 12).toPrecision(1)} &nbsp; años aprox.</p>
+            <p className="whitespace-nowrap">{Math.trunc((pet?.age as number) / 12)} &nbsp; años aprox.</p>
           </div>
         </section>
 
